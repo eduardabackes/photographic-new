@@ -1,28 +1,69 @@
 // Função para carregar as imagens do arquivo JSON
 function loadImages() {
-    fetch('http://localhost:3000/api/images')
-        .then(response => response.json())
-        .then(data => {
-            const carouselContainer = document.getElementById('imageCarousel');
-            let html = '';
+    const images = {
+        "images": [
+          {
+            "src": "./assets/photo/italia1.jpg",
+            "alt": "Photo 1",
+            "caption": "Sunset by the sea, in southern Italy"
+          },
+          {
+            "src": "./assets/photo/italia3.jpg",
+            "alt": "Photo 2",
+            "caption": "Sunset through my window, in southern Italy"
+          },
+          {
+            "src": "./assets/photo/italia4.jpg",
+            "alt": "Photo 3",
+            "caption": "Flowers blooming contrasting with the colors of the sunset, in southern Italy"
+          },
+          {
+            "src": "./assets/photo/portugal2.jpg",
+            "alt": "Photo 4",
+            "caption": "A summer shiny day, in Portugal"
+          },
+          {
+            "src": "./assets/photo/r.jpg",
+            "alt": "Photo 5",
+            "caption": "Reflection of the sun on the sea, somewhere in southern Brazil"
+          },
+          {
+            "src": "./assets/photo/rs.jpg",
+            "alt": "Photo 6",
+            "caption": "Inside the forest, in southern Brazil"
+          },
+          {
+            "src": "./assets/photo/spain.jpg",
+            "alt": "Photo 7",
+            "caption": "The beauty of giant water lily in the middle of nature, in Spain"
+          },
+          {
+            "src": "./assets/photo/spain2.jpg",
+            "alt": "Photo 8",
+            "caption": "The magical hidden paradise, in Spain"
+          },
+          {
+            "src": "./assets/photo/spain3.jpg",
+            "alt": "Photo 9",
+            "caption": "The view to the paradisiacal Mediterranean Sea, in Spain"
+          }
+        ]
+      };
+    // Iterar sobre as imagens no JSON e gerar o HTML
+    images.forEach(image => {
+        html += `
+            <div class="carousel-slide">
+                <img src="${image.src}" alt="${image.alt}" class="carousel-image">
+                <p>${image.caption}</p>
+            </div>
+        `;
+    });
 
-            // Iterar sobre as imagens no JSON e gerar o HTML
-            data.images.forEach(image => {
-                html += `
-                    <div class="carousel-slide">
-                        <img src="${image.src}" alt="${image.alt}" class="carousel-image">
-                        <p>${image.caption}</p>
-                    </div>
-                `;
-            });
+    // Inserir as imagens no carrossel
+    carouselContainer.innerHTML = html;
 
-            // Inserir as imagens no carrossel
-            carouselContainer.innerHTML = html;
-
-            // Inicializar o carrossel
-            startCarousel();
-        })
-        .catch(error => console.error('Error loading images:', error));
+    // Inicializar o carrossel
+    startCarousel();
 }
 
 // Função para controlar o carrossel
